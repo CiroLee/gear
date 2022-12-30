@@ -73,15 +73,6 @@ func TestDeduplicate(t *testing.T) {
 	is.Equal(r, []int{1, 2, 3, 4, 5})
 }
 
-func TestSum(t *testing.T) {
-	is := assert.New(t)
-
-	s := []int{1, 2, 3, 4, 5}
-	r := Sum(s)
-
-	is.Equal(r, 15)
-}
-
 func TestMap(t *testing.T) {
 	is := assert.New(t)
 

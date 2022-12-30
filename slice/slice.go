@@ -26,7 +26,7 @@ func Includes[T comparable](s []T, el T) bool {
 	return false
 }
 
-// Every weather all elements in the slice passes the test implemented by the provided function
+// Every weather all elements in the slice passed the test implemented by the provided function
 func Every[T any](s []T, fn func(el T, index int) bool) bool {
 	for i, v := range s {
 		if !fn(v, i) {
@@ -36,7 +36,7 @@ func Every[T any](s []T, fn func(el T, index int) bool) bool {
 	return true
 }
 
-// Some weather at least one element in the slice passes the test implemented by the provide function
+// Some weather at least one element in the slice passed the test implemented by the provide function
 func Some[T any](s []T, fn func(el T, index int) bool) bool {
 	for i, v := range s {
 		if fn(v, i) {
@@ -59,15 +59,6 @@ func Deduplicate[T constraints.Ordered | string](s []T) []T {
 	return r
 }
 
-// Sum return a sum of the slice
-func Sum[T constraints.Integer | constraints.Float | constraints.Complex](s []T) T {
-	var sum T
-	for _, v := range s {
-		sum += v
-	}
-	return sum
-}
-
 // Map create a new slice populated with the results of calling the provide function on every element in the calling slice
 func Map[T, K any](s []T, cb func(el T, index int) K) []K {
 	var r = make([]K, 0, len(s))
@@ -84,7 +75,7 @@ func ForEach[T any](s []T, cb func(el T, index int)) {
 	}
 }
 
-// Filter filtered down to just the elements from the given slice that pass the test implemented by the provided function
+// Filter filtered down to just the elements from the given slice that passed the test implemented by the provided function
 func Filter[T any](s []T, filter func(el T, index int) bool) []T {
 	var r = make([]T, 0, len(s))
 	for i, v := range s {
