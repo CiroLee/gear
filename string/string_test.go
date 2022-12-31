@@ -37,5 +37,39 @@ func TestCharAt(t *testing.T) {
 	is.Equal(r1, "l")
 	is.Equal(r2, "")
 	is.Equal(r3, "")
-	
+
+}
+
+func TestContact(t *testing.T) {
+	is := assert.New(t)
+	r := Contact("hello ", "world")
+	is.Equal(r, "hello world")
+}
+
+func TestUppercase(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1 := "hello world"
+	s2 := "你好world"
+
+	r1 := ToUpperCase(s1)
+	r2 := ToUpperCase(s2)
+
+	is.Equal(r1, "Hello world")
+	is.Equal(r2, s2)
+}
+
+func TestToLowerCase(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1 := "HELLO WORLD"
+	s2 := "你好world"
+
+	r1 := ToLowerCase(s1)
+	r2 := ToLowerCase(s2)
+
+	is.Equal(r1, "hELLO WORLD")
+	is.Equal(r2, s2)
 }
