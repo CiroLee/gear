@@ -49,13 +49,32 @@ func CharAt(str string, index int) string {
 
 // Contact Concatenate multiple strings and return a new string
 func Contact(args ...string) string {
-	var r string
 	var builder strings.Builder
 	for _, v := range args {
 		builder.WriteString(v)
 	}
-	r = builder.String()
-	return r
+	return builder.String()
+}
+
+// ContactBySlice concatenate a string slice and return a new string. support a separator if necessary
+func ContactBySlice(args []string, separator string) string {
+	var (
+		sep     string = ""
+		builder strings.Builder
+	)
+	if separator != "" {
+		sep = separator
+	}
+	for i, v := range args {
+		if i < len(args)-1 {
+			builder.WriteString(v)
+			builder.WriteString(sep)
+		} else {
+			builder.WriteString(v)
+		}
+	}
+
+	return builder.String()
 }
 
 func lowerOrUpper(s, t string) string {
