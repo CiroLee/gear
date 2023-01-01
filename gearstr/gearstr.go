@@ -6,7 +6,7 @@ import "strings"
 * like javascript String methods
  */
 
-// SubString returns the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied
+// SubString returns the part of the gearstr from the start and excluding the end, or to the end of the gearstr if no end index is supplied
 // ps: not included the end index element
 func SubString(str string, start, end int) string {
 	var runeStr = []rune(str)
@@ -37,7 +37,7 @@ func SubString(str string, start, end int) string {
 	return string(runeStr[_start:_end])
 }
 
-// CharAt returns a specified character from a string
+// CharAt returns a specified character from a gearstr
 func CharAt(str string, index int) string {
 	var runeStr = []rune(str)
 	if index > len(runeStr)-1 || index < 0 {
@@ -47,7 +47,7 @@ func CharAt(str string, index int) string {
 	return string(runeStr[index])
 }
 
-// Contact Concatenate multiple strings and return a new string
+// Contact Concatenate multiple strings and return a new gearstr
 func Contact(args ...string) string {
 	var builder strings.Builder
 	for _, v := range args {
@@ -56,7 +56,7 @@ func Contact(args ...string) string {
 	return builder.String()
 }
 
-// ContactBySlice concatenate a string slice and return a new string. support a separator if necessary
+// ContactBySlice concatenate a gearstr gearslice and return a new gearstr. support a separator if necessary
 func ContactBySlice(args []string, separator string) string {
 	var (
 		sep     string = ""
@@ -96,12 +96,12 @@ func lowerOrUpper(s, t string) string {
 	return string(r)
 }
 
-// ToUpperCase change the first letter of the string to upper
+// ToUpperCase change the first letter of the gearstr to upper
 func ToUpperCase(s string) string {
 	return lowerOrUpper(s, "upper")
 }
 
-// ToLowerCase change the first letter of the string to lower
+// ToLowerCase change the first letter of the gearstr to lower
 func ToLowerCase(s string) string {
 	return lowerOrUpper(s, "lower")
 }
