@@ -85,3 +85,23 @@ func Filter[T any](s []T, filter func(el T, index int) bool) []T {
 	}
 	return r
 }
+
+// Find Returns the value of the first element of the slice that passed the test function provided
+func Find[T any](s []T, fn func(el T, index int) bool) (T, bool) {
+	for i, v := range s {
+		if fn(v, i) {
+			return v, true
+		}
+	}
+	var empty T
+	return empty, false
+}
+
+// Contact Concatenate multiple slices and return a new slice
+func Contact[T any](args ...[]T) []T {
+	var r = args[0]
+	for i := 1; i < len(args); i++ {
+		r = append(r, args[i]...)
+	}
+	return r
+}
