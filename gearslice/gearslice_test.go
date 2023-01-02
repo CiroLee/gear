@@ -1,4 +1,4 @@
-package gear
+package gearslice
 
 import (
 	"fmt"

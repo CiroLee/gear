@@ -1,9 +1,10 @@
-package gear
+package gearmap
 
 import (
-	"github.com/stretchr/testify/assert"
 	"sort"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPick(t *testing.T) {

@@ -1,8 +1,9 @@
-package gear
+package gearmath
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSum(t *testing.T) {

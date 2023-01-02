@@ -1,4 +1,4 @@
-package gear
+package gearstring
 
 import (
 	"testing"
@@ -45,18 +45,6 @@ func TestContact(t *testing.T) {
 	is := assert.New(t)
 	r := Contact("hello ", "world")
 	is.Equal(r, "hello world")
-}
-
-func TestContactBySlice(t *testing.T) {
-	t.Parallel()
-	is := assert.New(t)
-
-	s := []string{"hello", "world"}
-	r1 := ContactBySlice(s, "")
-	r2 := ContactBySlice(s, "-")
-
-	is.Equal(r1, "helloworld")
-	is.Equal(r2, "hello-world")
 }
 
 func TestUppercase(t *testing.T) {
