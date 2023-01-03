@@ -1,6 +1,9 @@
 package gearslice
 
-import "golang.org/x/exp/constraints"
+import (
+	"errors"
+	"golang.org/x/exp/constraints"
+)
 
 /*
  * like javascript Array's methods
@@ -129,4 +132,23 @@ func Shift[T any](s *[]T) T {
 	var first = (*s)[0]
 	*s = (*s)[1:]
 	return first
+}
+
+// Remove remove a value in the slice at a given index. it will modify the origin slice
+func Remove[T any](s *[]T, index int) error {
+	if index < 0 || index > len(*s)-1 {
+		return errors.New("insert: invalid index. index must be less than the length of the slice, and greater than or equal than zero")
+	}
+	*s = append((*s)[:index], (*s)[index+1:]...)
+	return nil
+}
+
+// Insert insert a value in the slice at a given index. it will modify the origin slice
+func Insert[T any](s *[]T, index int, value T) error {
+	if index < 0 || index > len(*s)-1 {
+		return errors.New("insert: invalid index. index must be less than the length of the slice, and greater than or equal than zero")
+	}
+	*s = append((*s)[:index+1], (*s)[index:]...)
+	(*s)[index] = value
+	return nil
 }

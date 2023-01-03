@@ -186,3 +186,38 @@ func TestShift(t *testing.T) {
 	is.Equal(r, 1)
 	is.Equal(s, []int{2, 3, 4})
 }
+
+func TestInsert(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1, s2 := []int{1, 2, 3}, []int{2, 3, 4}
+
+	r1 := Insert(&s1, 1, 20)
+	r2 := Insert(&s2, 3, 20)
+	r3 := Insert(&s2, -1, 20)
+
+	is.Nil(r1)
+	is.Equal(s1, []int{1, 20, 2, 3})
+	is.Error(r2)
+	is.Error(r3)
+	is.Equal(s2, s2)
+}
+
+func TestRemove(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1, s2 := []int{1, 2, 3}, []int{2, 3, 4}
+
+	r1 := Remove(&s1, 1)
+	r2 := Remove(&s2, 3)
+	r3 := Remove(&s2, -1)
+
+	is.Nil(r1)
+	is.Equal(s1, []int{1, 3})
+	is.Error(r2)
+	is.Error(r3)
+	is.Equal(s2, s2)
+
+}
