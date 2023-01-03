@@ -150,3 +150,39 @@ func TestContact(t *testing.T) {
 
 	is.Equal(r, []int{1, 2, 3, 4, 5, 6, 6, 7, 8})
 }
+
+func TestFindIndex(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s := []int{0, 1, 2, 3, 4, 5}
+	r1 := FindIndex(s, func(el int, _ int) bool {
+		return el > 0
+	})
+	r2 := FindIndex(s, func(el int, _ int) bool {
+		return el > 100
+	})
+
+	is.Equal(r1, 1)
+	is.Equal(r2, -1)
+}
+
+func TestPop(t *testing.T) {
+	is := assert.New(t)
+
+	s := []int{1, 2, 3, 4}
+	r := Pop(&s)
+
+	is.Equal(r, 4)
+	is.Equal(s, []int{1, 2, 3})
+}
+
+func TestShift(t *testing.T) {
+	is := assert.New(t)
+
+	s := []int{1, 2, 3, 4}
+	r := Shift(&s)
+
+	is.Equal(r, 1)
+	is.Equal(s, []int{2, 3, 4})
+}
