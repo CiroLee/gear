@@ -64,11 +64,11 @@ func TestSome(t *testing.T) {
 	is.False(r2)
 }
 
-func TestDeduplicate(t *testing.T) {
+func TestUniq(t *testing.T) {
 	is := assert.New(t)
 
 	s := []int{1, 2, 3, 4, 4, 5}
-	r := Deduplicate(s)
+	r := Uniq(s)
 
 	is.Equal(r, []int{1, 2, 3, 4, 5})
 }
