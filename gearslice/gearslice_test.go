@@ -219,5 +219,21 @@ func TestRemove(t *testing.T) {
 	is.Error(r2)
 	is.Error(r3)
 	is.Equal(s2, s2)
+}
 
+func TestDrop(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s := []int{1, 2, 3, 4, 5, 6, 7}
+	r1, err1 := Drop(s, 2)
+	r2, err2 := Drop(s, -2)
+	r3, err3 := Drop(s, 10)
+
+	is.Equal(r1, []int{3, 4, 5, 6, 7})
+	is.Nil(err1)
+	is.Equal(r2, []int{1, 2, 3, 4, 5})
+	is.Nil(err2)
+	is.Empty(r3)
+	is.Error(err3)
 }

@@ -14,3 +14,31 @@ func TestSum(t *testing.T) {
 
 	is.Equal(r, 15)
 }
+
+func TestMin(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1 := []int{1, 2, 3, 4, -4, 5, 6}
+	s2 := []int{}
+
+	r1 := Min(s1)
+	r2 := Min(s2)
+
+	is.Equal(r1, -4)
+	is.Equal(r2, 0)
+}
+
+func TestMax(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1 := []int{1, 2, 3, 4, -4, 5, 6}
+	s2 := []int{}
+
+	r1 := Max(s1)
+	r2 := Max(s2)
+
+	is.Equal(r1, 6)
+	is.Equal(r2, 0)
+}

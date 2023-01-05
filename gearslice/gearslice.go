@@ -3,6 +3,7 @@ package gearslice
 import (
 	"errors"
 	"golang.org/x/exp/constraints"
+	"math"
 )
 
 /*
@@ -151,4 +152,17 @@ func Insert[T any](s *[]T, index int, value T) error {
 	*s = append((*s)[:index+1], (*s)[index:]...)
 	(*s)[index] = value
 	return nil
+}
+
+// Drop drops n elements from the beginning(if n greater than zero) or the end(if n less than zero) of the slice
+func Drop[T any](s []T, n int) ([]T, error) {
+	if len(s) <= int(math.Abs(float64(n))) {
+		return nil, errors.New("index exceeds the limit of the slice")
+	}
+	result := make([]T, 0, len(s)-int(math.Abs(float64(n))))
+	if n < 0 {
+		return append(result, s[0:len(s)-int(math.Abs(float64(n)))]...), nil
+	}
+	return append(result, s[n:]...), nil
+
 }
