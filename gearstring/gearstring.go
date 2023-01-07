@@ -1,6 +1,10 @@
 package gearstring
 
-import "strings"
+import (
+	"errors"
+	"regexp"
+	"strings"
+)
 
 /*
 * like javascript String methods
@@ -83,4 +87,17 @@ func ToUpperCase(s string) string {
 // ToLowerCase change the first letter of the gearstring to lower
 func ToLowerCase(s string) string {
 	return lowerOrUpper(s, "lower")
+}
+
+/*
+ * some advanced methods
+ */
+
+// EncryptedPhone hidden middle 4 numbers of the mobile phone number
+func EncryptedPhone(num string) (string, error) {
+	if len(num) != 11 {
+		return "", errors.New("phone number 11 degits")
+	}
+	re := regexp.MustCompile("(\\d{3})\\d{4}(\\d{4})")
+	return re.ReplaceAllString(num, "$1****$2"), nil
 }

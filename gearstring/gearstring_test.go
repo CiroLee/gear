@@ -74,3 +74,18 @@ func TestToLowerCase(t *testing.T) {
 	is.Equal(r1, "hELLO WORLD")
 	is.Equal(r2, s2)
 }
+func TestEncryptedPhone(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	phone1 := "1329988998" // 10 digits
+	phone2 := "13299889988"
+
+	r1, err1 := EncryptedPhone(phone1)
+	r2, err2 := EncryptedPhone(phone2)
+
+	is.Equal(r1, "")
+	is.Error(err1)
+	is.Equal(r2, "132****9988")
+	is.Nil(err2)
+}
