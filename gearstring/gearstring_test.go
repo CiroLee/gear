@@ -81,11 +81,31 @@ func TestEncryptedPhone(t *testing.T) {
 	phone1 := "1329988998" // 10 digits
 	phone2 := "13299889988"
 
-	r1, err1 := EncryptedPhone(phone1)
-	r2, err2 := EncryptedPhone(phone2)
+	r1, err1 := DesensitizePhone(phone1, "")
+	r2, err2 := DesensitizePhone(phone2, "")
+	r3, err3 := DesensitizePhone(phone2, "#")
 
 	is.Equal(r1, "")
 	is.Error(err1)
 	is.Equal(r2, "132****9988")
 	is.Nil(err2)
+	is.Equal(r3, "132####9988")
+	is.Nil(err3)
+}
+
+func TestDesensitizeData(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	str := "123这段文字加密00000"
+	r1, err1 := DesensitizeData(str, 3, 9, "@")
+	r2, err2 := DesensitizeData(str, 9, 3, "@")
+	r3, err3 := DesensitizeData(str, 3, 30, "+")
+
+	is.Equal(r1, "123@@@@@@00000")
+	is.Nil(err1)
+	is.Empty(r2)
+	is.Error(err2)
+	is.Equal(r3, "123+++++++++++")
+	is.Nil(err3)
 }

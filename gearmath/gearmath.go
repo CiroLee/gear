@@ -1,6 +1,10 @@
 package gearmath
 
-import "golang.org/x/exp/constraints"
+import (
+	"math"
+
+	"golang.org/x/exp/constraints"
+)
 
 // Sum return a sum of the slice
 func Sum[T constraints.Integer | constraints.Float | constraints.Complex](s []T) T {
@@ -41,4 +45,18 @@ func Max[T constraints.Ordered](s []T) T {
 		}
 	}
 	return max
+}
+
+// IsPrime weather a number is a prime
+func IsPrime(num int) bool {
+	if num < 2 {
+		return false
+	}
+	sqrt := math.Sqrt(float64(num))
+	for i := 2; float64(i) <= sqrt; i++ {
+		if num%i == 0 {
+			return false
+		}
+	}
+	return true
 }

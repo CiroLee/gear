@@ -42,3 +42,15 @@ func TestMax(t *testing.T) {
 	is.Equal(r1, 6)
 	is.Equal(r2, 0)
 }
+
+func TestIsPrime(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	is.False(IsPrime(4))
+	is.True(IsPrime(3))
+	is.True(IsPrime(2))
+	is.False(IsPrime(1))
+	is.False(IsPrime(0))
+	is.False(IsPrime(-1))
+}

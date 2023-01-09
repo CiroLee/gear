@@ -93,11 +93,39 @@ func ToLowerCase(s string) string {
  * some advanced methods
  */
 
-// EncryptedPhone hidden middle 4 numbers of the mobile phone number
-func EncryptedPhone(num string) (string, error) {
-	if len(num) != 11 {
+// DesensitizeData make data insensitive via hidden part of the data
+func DesensitizeData(val string, from, to uint, placeholder string) (string, error) {
+	p := "*"
+	strRune := []rune(val)
+	if placeholder != "" {
+		p = placeholder
+	}
+
+	if from >= to {
+		return "", errors.New("from must be greater than to")
+	}
+	if int(to) > len(strRune) {
+		to = uint(len(strRune))
+	}
+
+	f, t := int(from), int(to)
+	before := SubString(val, 0, f)
+	hidden := strings.Repeat(p, t-f)
+	after := SubString(val, t, len(strRune))
+
+	return Contact(before, hidden, after), nil
+}
+
+// DeDesensitizePhone hidden middle 4 numbers of the mobile phone
+func DesensitizePhone(val string, placeholder string) (string, error) {
+	p := "*"
+	if placeholder != "" {
+		p = placeholder
+	}
+	if len(val) != 11 {
 		return "", errors.New("phone number 11 degits")
 	}
 	re := regexp.MustCompile("(\\d{3})\\d{4}(\\d{4})")
-	return re.ReplaceAllString(num, "$1****$2"), nil
+	repl := Contact("$1", strings.Repeat(p, 4), "$2")
+	return re.ReplaceAllString(val, repl), nil
 }
