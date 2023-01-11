@@ -4,6 +4,8 @@ import (
 	"errors"
 	"golang.org/x/exp/constraints"
 	"math"
+	"math/rand"
+	"time"
 )
 
 /*
@@ -165,4 +167,22 @@ func Drop[T any](s []T, n int) ([]T, error) {
 	}
 	return append(result, s[n:]...), nil
 
+}
+
+// Sample get a random element from the slice
+func Sample[T any](s []T) T {
+	lens := len(s)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	random := r.Intn(lens + 1)
+	return s[random]
+}
+
+// Reverse reverse a slice, return a new slice
+func Reverse[T any](s []T) []T {
+	size := len(s)
+	var r = make([]T, 0, size)
+	for i := size - 1; i >= 0; i-- {
+		r = append(r, s[i])
+	}
+	return r
 }
