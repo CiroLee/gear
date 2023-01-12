@@ -54,3 +54,12 @@ func TestIsPrime(t *testing.T) {
 	is.False(IsPrime(0))
 	is.False(IsPrime(-1))
 }
+
+func TestMean(t *testing.T) {
+	is := assert.New(t)
+
+	s := []float64{2, 4, 6, 8}
+	r := Mean(s)
+
+	is.Equal(r, 5.0)
+}

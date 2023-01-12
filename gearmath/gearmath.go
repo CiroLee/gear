@@ -47,6 +47,13 @@ func Max[T constraints.Ordered](s []T) T {
 	return max
 }
 
+// Mean return the mean value of the slice
+func Mean(s []float64) float64 {
+	sum := Sum(s)
+	n := len(s)
+	return sum / (float64(n))
+}
+
 // IsPrime weather a number is a prime
 func IsPrime(num int) bool {
 	if num < 2 {
