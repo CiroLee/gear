@@ -55,7 +55,7 @@ i := gearslice.IndexOf(s, "c")
 // 2
 
 ```
-[back](#gearslice)
+[⬆️ back](#gearslice)
 
 
 
