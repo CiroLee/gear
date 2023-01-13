@@ -37,3 +37,25 @@ go test -v ./... -coverprofile=coverage.txt -covermode=atomic
 go test -cover ./...
 
 ``` 
+## apis    
+
+### gearslice     
+> slice expansion functions    
+
+- [IndexOf](#indexof)
+
+
+
+
+### IndexOf    
+return the index of the element in the slice, if the element is not in the slice, return -1    
+```go
+s := []string{"a", "b", "c"}
+i := gearslice.IndexOf(s, "c")
+// 2
+
+```
+[back](#gearslice)
+
+
+

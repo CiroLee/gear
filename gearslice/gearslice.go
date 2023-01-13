@@ -2,17 +2,18 @@ package gearslice
 
 import (
 	"errors"
-	"golang.org/x/exp/constraints"
 	"math"
 	"math/rand"
 	"time"
+
+	"golang.org/x/exp/constraints"
 )
 
 /*
  * like javascript Array's methods
  */
 
-// IndexOf return the index of the element in the slice
+// IndexOf return the index of the element in the slice, if the element is not in the slice, return -1
 func IndexOf[T comparable](s []T, el T) int {
 	for k, v := range s {
 		if v == el {
