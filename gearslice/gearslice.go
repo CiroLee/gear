@@ -93,7 +93,7 @@ func Filter[T any](s []T, filter func(el T, index int) bool) []T {
 	return r
 }
 
-// Find Returns the value of the first element of the slice that passed the test function provided
+// Find return the value of the first element of the slice that passed the test function provided
 func Find[T any](s []T, fn func(el T, index int) bool) (T, bool) {
 	for i, v := range s {
 		if fn(v, i) {
@@ -104,8 +104,8 @@ func Find[T any](s []T, fn func(el T, index int) bool) (T, bool) {
 	return empty, false
 }
 
-// FindIndex returns the index of the first element in the slice that passed the test implemented by the provided function
-// returns -1 if no corresponding element is found
+// FindIndex return the index of the first element in the slice that passed the test implemented by the provided function
+// return -1 if no corresponding element is found
 func FindIndex[T any](s []T, fn func(el T, index int) bool) int {
 	for i, v := range s {
 		if fn(v, i) {
@@ -124,14 +124,14 @@ func Contact[T any](args ...[]T) []T {
 	return r
 }
 
-// Pop removes the last element from a slice and returns that element. it will change the length of the slice
+// Pop removes the last element from a slice and return that element, return the removed element. it will change the length of the slice
 func Pop[T any](s *[]T) T {
 	var last = (*s)[len(*s)-1]
 	*s = (*s)[:len(*s)-1]
 	return last
 }
 
-// Shift removes the first element from a slice and returns that removed element. This method changes the length of the slice
+// Shift removes the first element from a slice and return that removed element. This method changes the length of the slice
 func Shift[T any](s *[]T) T {
 	var first = (*s)[0]
 	*s = (*s)[1:]

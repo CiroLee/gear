@@ -10,7 +10,7 @@ import (
 * like javascript String methods
  */
 
-// SubString returns the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied
+// SubString return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied
 // ps: not included the end index element
 func SubString(str string, start, end int) string {
 	var runeStr = []rune(str)
@@ -41,7 +41,7 @@ func SubString(str string, start, end int) string {
 	return string(runeStr[_start:_end])
 }
 
-// CharAt returns a specified character from a string
+// CharAt return a specified character from a string
 func CharAt(str string, index int) string {
 	var runeStr = []rune(str)
 	if index > len(runeStr)-1 || index < 0 {
