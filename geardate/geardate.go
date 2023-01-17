@@ -17,7 +17,7 @@ const (
 	OnlyHMSZhLayout    = "15时04分05秒"
 )
 
-// Format formats a unix timestamp according the layout
+// Format format a unix timestamp according the layout
 func Format(t int64, layout string) string {
 	tm := time.Unix(t, 0)
 	return tm.Format(layout)

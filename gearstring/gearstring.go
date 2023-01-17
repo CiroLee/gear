@@ -11,7 +11,7 @@ import (
  */
 
 // SubString return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied
-// ps: not included the end index element
+// ps: not include the end index element
 func SubString(str string, start, end int) string {
 	var runeStr = []rune(str)
 	_start, _end := start, end
@@ -79,12 +79,12 @@ func lowerOrUpper(s, t string) string {
 	return string(r)
 }
 
-// ToUpperCase change the first letter of the gearstring to upper
+// ToUpperCase change the first letter of the string to upper
 func ToUpperCase(s string) string {
 	return lowerOrUpper(s, "upper")
 }
 
-// ToLowerCase change the first letter of the gearstring to lower
+// ToLowerCase change the first letter of the string to lower
 func ToLowerCase(s string) string {
 	return lowerOrUpper(s, "lower")
 }
@@ -93,7 +93,7 @@ func ToLowerCase(s string) string {
  * some advanced methods
  */
 
-// DesensitizeData make data insensitive via hidden part of the data
+// DesensitizeData make data insensitive via hidden part of the data, default placeholder is '*'
 func DesensitizeData(val string, from, to uint, placeholder string) (string, error) {
 	p := "*"
 	strRune := []rune(val)
@@ -116,7 +116,7 @@ func DesensitizeData(val string, from, to uint, placeholder string) (string, err
 	return Contact(before, hidden, after), nil
 }
 
-// DeDesensitizePhone hidden middle 4 numbers of the mobile phone
+// DeDesensitizePhone hidden middle 4 numbers of the mobile phone, default placeholder is '*'
 func DesensitizePhone(val string, placeholder string) (string, error) {
 	p := "*"
 	if placeholder != "" {

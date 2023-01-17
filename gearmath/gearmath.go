@@ -16,7 +16,7 @@ func Sum[T constraints.Integer | constraints.Float | constraints.Complex](s []T)
 }
 
 // Min return the minimum value of the slice
-// return zero value if the slice is tempy
+// return zero value if the slice is empty
 func Min[T constraints.Ordered](s []T) T {
 	var min T
 	if len(s) == 0 {
@@ -32,7 +32,7 @@ func Min[T constraints.Ordered](s []T) T {
 }
 
 // Max return the minimum value of the slice
-// return zero value if the slice is tempy
+// return zero value if the slice is empty
 func Max[T constraints.Ordered](s []T) T {
 	var max T
 	if len(s) == 0 {

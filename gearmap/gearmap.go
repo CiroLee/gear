@@ -6,7 +6,7 @@ import gear "github.com/CiroLee/gear/gearslice"
  * like javascript Object's methods
  */
 
-// Pick return parts of a map depend on keys
+// Pick return parts of the map according to keys
 func Pick[K comparable, V any](m map[K]V, keys []K) map[K]V {
 	var r = make(map[K]V, len(keys))
 	for _, k := range keys {
@@ -15,7 +15,7 @@ func Pick[K comparable, V any](m map[K]V, keys []K) map[K]V {
 	return r
 }
 
-// PickBy return parts of a map depend on custom function
+// PickBy return parts of a map according to the provided function
 func PickBy[K comparable, V any](m map[K]V, fn func(k K, v V) bool) map[K]V {
 	var r = make(map[K]V, 0)
 	for k, v := range m {
@@ -26,7 +26,7 @@ func PickBy[K comparable, V any](m map[K]V, fn func(k K, v V) bool) map[K]V {
 	return r
 }
 
-// Omit remove parts of a map depend on keys
+// Omit remove parts of a map according to keys
 func Omit[K comparable, V any](m map[K]V, keys []K) map[K]V {
 	var r = make(map[K]V, len(m)-len(keys))
 	for k, v := range m {
@@ -49,7 +49,7 @@ func OmitBy[K comparable, V any](m map[K]V, fn func(k K, v V) bool) map[K]V {
 	return r
 }
 
-// Values return values of a map
+// Values return values of the map
 func Values[K comparable, V any](m map[K]V) []V {
 	var values = make([]V, 0, len(m))
 	for _, v := range m {
@@ -58,7 +58,7 @@ func Values[K comparable, V any](m map[K]V) []V {
 	return values
 }
 
-// Keys return keys of a map
+// Keys return keys of the map
 func Keys[K comparable, V any](m map[K]V) []K {
 	var keys = make([]K, 0)
 	for k := range m {

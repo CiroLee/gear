@@ -47,7 +47,7 @@ func TestContact(t *testing.T) {
 	is.Equal(r, "hello world")
 }
 
-func TestUppercase(t *testing.T) {
+func TestUpperCase(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
 
@@ -74,7 +74,7 @@ func TestToLowerCase(t *testing.T) {
 	is.Equal(r1, "hELLO WORLD")
 	is.Equal(r2, s2)
 }
-func TestEncryptedPhone(t *testing.T) {
+func TestDesensitizePhone(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
 

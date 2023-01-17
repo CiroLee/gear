@@ -62,6 +62,41 @@ go test -cover ./...
 - [Reverse](#reverse)
 
 
+### gearstring    
+> string expansion functions    
+
+- [Substring](#substring)
+- [CharAt](#charat)
+- [Contact](#contact)
+- [ToUpperCase](#touppercase)
+- [ToLowerCase](#tolowercase)
+- [DesensitizeData](#desensitizedata)
+- [DesensitizePhone](#desensitizephone)
+
+### gearmap
+> map expansion functions
+
+- [Pick](#pick)
+- [PickBy](#pickby)
+- [Omit](#omit)
+- [OmitBy](#omitby)
+- [Values](#values)
+- [Keys](#keys)
+- [Assign](#assign)
+
+### gearmath    
+> math expansion functions     
+
+- [Sum](#sum)
+- [Min](#min)
+- [Max](#max)
+- [Mean](#mean)
+- [isPrime](isprime)
+
+### geardate     
+> date expansion function      
+- [Format](#format)
+- [IsLeap](#isleap)
 
 ### IndexOf    
 return the index of the element in the slice, if the element is not in the slice, return -1    
@@ -288,3 +323,214 @@ r := gearslice.Reverse(s)
 ```
 [⬆️ back](#gearslice)
 
+### SubString     
+return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied. Not include the index element
+
+```go
+str := "hello world"
+r := gearstring.SubString(s, 1, 5)
+// "ello"
+
+[⬆️ back](#gearstring)
+```
+### CharAt     
+return a specified character from a string
+
+```go
+str := "hello world"
+r := gearstring.CharAt(str, 2)
+// "l"
+```
+[⬆️ back](#gearstring)
+
+### Contact     
+Concatenate multiple strings and return a new string
+
+```go
+r := gearslice.Contact("hello ", "world")
+// "hello world"
+
+[⬆️ back](#gearstring)
+```
+### ToUpperCase     
+change the first letter of the string to upper
+
+```go
+str := "hello world"
+r := gearstring.ToUpperCase(str)
+// "Hello world"
+```
+[⬆️ back](#gearstring)
+### ToLowerCase     
+change the first letter of the string to lower
+
+```go
+str := "HELLO WORLD"
+r := gearstring.ToLowerCase(str)
+// "hELLO WORLD"
+```
+[⬆️ back](#gearstring)
+
+### DesensitizeData    
+make data insensitive via hidden part of the data
+
+```go
+str := "123这段文字加密00000"
+r, _ := gearstring.DesensitizeData(str, 3, 9, "@")
+// "123@@@@@@00000"
+```
+[⬆️ back](#gearstring)
+### DesensitizePhone      
+hidden middle 4 numbers of the mobile phone, default placeholder is '*'       
+
+```go
+phone := "13299889988"
+r := gearstring.DesensitizePhone(phone, "#")
+// "132####9988"
+```
+[⬆️ back](#gearstring)
+
+### Pick
+return parts of the map according to keys
+
+```go
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+r := gearmap.Pick(m, []string{"a", "b"})
+// map[string]int{"a":1, "b": 2}
+```
+[⬆️ back](#gearmap)
+
+### PickBy     
+return parts of a map passed the test implemented by the provided function     
+
+```go
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+r := gearmap.PickBy(m, func(_ string, v int) bool {
+  return v > 2
+})
+// map[string]int{"c": 3}
+```
+[⬆️ back](#gearmap)
+
+### Omit     
+remove parts of a map according to keys
+
+```go
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+r := gearmap.Omit(m, []string{"a", "b"})
+// map[string]int{"c": 3}
+```
+[⬆️ back](#gearmap)
+
+### OmitBy     
+remove parts of a map passed the test implemented by the provided function
+
+```go
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+r := gearmap.OmitBy(m, func(_ string, v int) bool {
+  return v < 2
+})
+// map[string]int{"b": 2, "c": 3}
+```
+[⬆️ back](#gearmap)
+
+### Values     
+return values of the m
+
+```go
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+r := gearmap.Values(m)
+sort.Strings(r)
+// []int{1, 2, 3}
+```
+[⬆️ back](#gearmap)
+
+### Keys     
+return keys of the map
+
+```go
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+r := gearmap.Keys(m)
+sort.Strings(r)
+// []string{"a", "b", "c"}
+```
+[⬆️ back](#gearmap)
+
+### Assign     
+merge multiple maps into a new map.
+
+```go
+m1 := map[string]int{"a": 1, "b": 2, "c": 3}
+m2 := map[string]int{"d": 4}
+r := gearmap.Assign(m1, m2)
+// map[string]int{"a": 1, "b": 2, "c": 3, "d": 4}
+```
+[⬆️ back](#gearmap)
+
+### Sum     
+return a sum of the slice
+
+```go
+s := []int{1, 2, 3, 4, 5}
+r := gearmath.Sum(s)
+// 15
+```
+[⬆️ back](#gearmath)
+
+### Min     
+return the minimum value of the slice, return zero value if the slice is empty     
+
+```go
+s := []int{1, 2, 3, 4, -4, 5, 6}
+r := gearmath.Min(s)
+// -4
+```
+[⬆️ back](#gearmath)
+
+### Max      
+return the minimum value of the slice, return zero value if the slice is empty      
+
+```go
+s := []int{1, 2, 3, 4, -4, 5, 6}
+r := gearmath.Max(s)
+// 6
+```
+[⬆️ back](#gearmath)
+
+### Mean     
+return the mean value of the slice      
+
+```go
+s := []float64{2, 4, 6, 8}
+r := gearmath.Mean(s)
+// 5.0
+```
+[⬆️ back](#gearmath)
+
+### IsPrime     
+weather a number is a prime      
+
+```go
+gearmath.IsPrime(4)
+// false
+```
+[⬆️ back](#gearmath)
+
+### Format    
+format a unix timestamp according the layout      
+
+```go
+var timestamp int64 = 1673259412 // 2023-01-09 18:16:52
+r := geardate.Format(timestamp, geardate.DefaultLayout)
+// "2023-01-09 18:16:52"
+```
+[⬆️ back](#gearmath)
+
+### IsLeap     
+weather the year is leap      
+
+```go
+geardate.IsLeap(2023)
+// false
+```
+[⬆️ back](#gearmath)
