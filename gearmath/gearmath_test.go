@@ -1,6 +1,7 @@
 package gearmath
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,6 +14,16 @@ func TestSum(t *testing.T) {
 	r := Sum(s)
 
 	is.Equal(r, 15)
+}
+
+func TestSumBy(t *testing.T) {
+	is := assert.New(t)
+	s := []string{"hello", "world"}
+	r := SumBy(s, func(el string, _ int) int {
+		return len(el)
+	})
+
+	is.Equal(r, 10)
 }
 
 func TestMin(t *testing.T) {
@@ -62,4 +73,36 @@ func TestMean(t *testing.T) {
 	r := Mean(s)
 
 	is.Equal(r, 5.0)
+}
+
+func TestIsSubset(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1 := []int{1, 2, 3, 4}
+	s2 := []int{1, 3}
+	s3 := []int{2, 3, 4, 5}
+
+	ss1 := []string{"foo", "bar"}
+	ss2 := []string{"foo"}
+	r1 := IsSubset(s1, s2)
+	r2 := IsSubset(s2, s1)
+	r3 := IsSubset(s1, s3)
+
+	rr1 := IsSubset(ss1, ss2)
+
+	is.True(r1)
+	is.False(r2)
+	is.False(r3)
+	is.True(rr1)
+}
+
+func TestUnion(t *testing.T) {
+	is := assert.New(t)
+
+	s1, s2, s3 := []int{1, 2, 3, 4}, []int{2, 5, 7}, []int{-1, 0, 0}
+	r := Union(s1, s2, s3)
+	sort.Ints(r)
+
+	is.Equal(r, []int{-1, 0, 1, 2, 3, 4, 5, 7})
 }

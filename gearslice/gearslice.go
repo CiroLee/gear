@@ -54,7 +54,7 @@ func Some[T any](s []T, fn func(el T, index int) bool) bool {
 }
 
 // Uniq remove duplicate elements in the slice
-func Uniq[T constraints.Ordered | string](s []T) []T {
+func Uniq[T constraints.Ordered | constraints.Complex](s []T) []T {
 	r := make([]T, 0)
 	m := make(map[T]bool) // value maybe any type
 	for _, v := range s {

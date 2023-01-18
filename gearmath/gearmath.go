@@ -3,6 +3,7 @@ package gearmath
 import (
 	"math"
 
+	"github.com/CiroLee/gear/gearslice"
 	"golang.org/x/exp/constraints"
 )
 
@@ -13,6 +14,15 @@ func Sum[T constraints.Integer | constraints.Float | constraints.Complex](s []T)
 		sum += v
 	}
 	return sum
+}
+
+// SumBy summarize the values in the slice using the given return value from the function
+func SumBy[T any, V constraints.Integer | constraints.Float](s []T, fn func(el T, index int) V) V {
+	var r V
+	for i, v := range s {
+		r += fn(v, i)
+	}
+	return r
 }
 
 // Min return the minimum value of the slice
@@ -66,4 +76,26 @@ func IsPrime(num int) bool {
 		}
 	}
 	return true
+}
+
+// IsSubset return true if the slice contains all the elements in the subset
+func IsSubset[T comparable](s, subset []T) bool {
+	var b = true
+	if len(subset) > len(s) {
+		b = false
+	} else {
+		for _, v := range subset {
+			if !gearslice.Includes(s, v) {
+				b = false
+				break
+			}
+		}
+	}
+
+	return b
+}
+
+// Union return the union values of slices
+func Union[T constraints.Ordered | constraints.Complex](args ...[]T) []T {
+	return gearslice.Uniq(gearslice.Contact(args...))
 }

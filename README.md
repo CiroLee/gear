@@ -61,7 +61,6 @@ go test -cover ./...
 - [Sample](#sample)
 - [Reverse](#reverse)
 
-
 ### gearstring    
 > string expansion functions    
 
@@ -88,10 +87,13 @@ go test -cover ./...
 > math expansion functions     
 
 - [Sum](#sum)
+- [SumBy](#sumby)
 - [Min](#min)
 - [Max](#max)
 - [Mean](#mean)
 - [isPrime](isprime)
+- [IsSubset](#issubset)
+- [Union](#union)
 
 ### geardate     
 > date expansion function      
@@ -323,6 +325,8 @@ r := gearslice.Reverse(s)
 ```
 [⬆️ back](#gearslice)
 
+
+
 ### SubString     
 return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied. Not include the index element
 
@@ -477,6 +481,18 @@ r := gearmath.Sum(s)
 ```
 [⬆️ back](#gearmath)
 
+### SumBy     
+summarize the values in the slice using the given return value from the function
+
+```go
+s := []string{"hello", "world"}
+r := gearmath.SumBy(s, func(el string, _ int) int {
+  return len(el)
+})
+// 10
+```
+[⬆️ back](#gearmath)
+
 ### Min     
 return the minimum value of the slice, return zero value if the slice is empty     
 
@@ -532,5 +548,27 @@ weather the year is leap
 ```go
 geardate.IsLeap(2023)
 // false
+```
+[⬆️ back](#gearmath)
+
+### IsSubset      
+return true if the slice contains all the elements in the subset
+
+```go
+s1 := []int{1, 2, 3, 4}
+s2 := []int{1, 3}
+r := gearslice.IsSubset(s1, s2)
+// true
+```
+[⬆️ back](#gearmath)
+
+### Union     
+return the union values of slices      
+
+```go
+s1, s2, s3 := []int{1, 2, 3, 4}, []int{2, 5, 7}, []int{-1, 0, 0}
+r := Union(s1, s2, s3)
+sort.Ints(r)
+// []int{-1, 0, 1, 2, 3, 4, 5, 7}
 ```
 [⬆️ back](#gearmath)
