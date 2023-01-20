@@ -256,3 +256,23 @@ func TestReverse(t *testing.T) {
 
 	is.Equal(r, []int{5, 4, 3, 2, 1})
 }
+
+func TestCount(t *testing.T) {
+	is := assert.New(t)
+
+	s := []int{1, 2, 3, 4, 4}
+	r := Count(s, 4)
+
+	is.Equal(r, 2)
+}
+
+func TestCountBy(t *testing.T) {
+	is := assert.New(t)
+
+	s := []int{1, 2, 3, 4, 5, 5, 6, 7, 8}
+	r := CountBy(s, func(el int, _ int) bool {
+		return el > 5
+	})
+
+	is.Equal(r, 3)
+}

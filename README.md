@@ -60,6 +60,8 @@ go test -cover ./...
 - [Drop](#drop)
 - [Sample](#sample)
 - [Reverse](#reverse)
+- [Count](#count)
+- [CountBy](#countby)
 
 ### gearstring    
 > string expansion functions    
@@ -325,7 +327,25 @@ r := gearslice.Reverse(s)
 ```
 [⬆️ back](#gearslice)
 
+### Count     
+return the number of elements in the slice that equal to value      
+```go
+s := []int{1, 2, 3, 4, 4}
+r := gearslice.Count(s, 4)
+// 2
+```
+[⬆️ back](#gearslice)
 
+### CountBy      
+return the number of the elements in the slice that pass the test implemented by the provided the function     
+```go
+s := []int{1, 2, 3, 4, 5, 5, 6, 7, 8}
+r := gearslice.CountBy(s, func(el int, _ int) bool {
+    return el > 5
+})
+// 3
+```
+[⬆️ back](#gearslice)
 
 ### SubString     
 return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied. Not include the index element
@@ -334,9 +354,8 @@ return the part of the string from the start and excluding the end, or to the en
 str := "hello world"
 r := gearstring.SubString(s, 1, 5)
 // "ello"
-
-[⬆️ back](#gearstring)
 ```
+[⬆️ back](#gearstring)
 ### CharAt     
 return a specified character from a string
 

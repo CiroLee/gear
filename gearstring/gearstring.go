@@ -116,7 +116,7 @@ func DesensitizeData(val string, from, to uint, placeholder string) (string, err
 	return Contact(before, hidden, after), nil
 }
 
-// DeDesensitizePhone hidden middle 4 numbers of the mobile phone, default placeholder is '*'
+// DesensitizePhone hidden middle 4 numbers of the mobile phone, default placeholder is '*'
 func DesensitizePhone(val string, placeholder string) (string, error) {
 	p := "*"
 	if placeholder != "" {

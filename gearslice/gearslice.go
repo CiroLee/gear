@@ -187,3 +187,25 @@ func Reverse[T any](s []T) []T {
 	}
 	return r
 }
+
+// Count return the number of elements in the slice that equal to value
+func Count[T comparable](s []T, value T) int {
+	var count int
+	for _, v := range s {
+		if v == value {
+			count++
+		}
+	}
+	return count
+}
+
+// CountBy return the number of the elements in the slice that pass the test implemented by the provided the function
+func CountBy[T comparable](s []T, fn func(el T, index int) bool) int {
+	var count int
+	for i, v := range s {
+		if fn(v, i) {
+			count++
+		}
+	}
+	return count
+}
