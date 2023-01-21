@@ -45,7 +45,6 @@ func OmitBy[K comparable, V any](m map[K]V, fn func(k K, v V) bool) map[K]V {
 			r[k] = v
 		}
 	}
-
 	return r
 }
 
@@ -75,6 +74,5 @@ func Assign[K comparable, V any](maps ...map[K]V) map[K]V {
 			r[k] = v
 		}
 	}
-
 	return r
 }

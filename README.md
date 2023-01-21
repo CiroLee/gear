@@ -12,7 +12,7 @@ such as gearslice that expands the ability of slice
 import 
   (
     "fmt",
-    "github.com/CiroLee/gearslice"
+    "github.com/CiroLee/gear/gearslice"
   )
 
 func main() {
@@ -21,23 +21,7 @@ func main() {
   // []int{1,2,3,4,5,6}
 }
 ```
-
-
-## test
-```shell
-cd your-path/gear
-
-# single file
-go test -v ./gearmap
-
-# all files and output test report
-go test -v ./... -coverprofile=coverage.txt -covermode=atomic
-
-# test all and without output
-go test -cover ./...
-
-``` 
-## apis    
+## docs    
 
 ### gearslice     
 > slice expansion functions    
@@ -104,7 +88,11 @@ go test -cover ./...
 
 ### IndexOf    
 return the index of the element in the slice, if the element is not in the slice, return -1    
-
+signature:     
+```go
+func IndexOf[T comparable](s []T, el T) int
+```
+example:
 ```go
 s := []string{"a", "b", "c"}
 i := gearslice.IndexOf(s, "c")
@@ -114,22 +102,29 @@ i := gearslice.IndexOf(s, "c")
 
 [⬆️ back](#gearslice)
 ### FindIndex
-return the index of the first element in the slice that passed the test implemented by the provided function. return -1 if no corresponding element is found.
-
+return the index of the first element in the slice that passed the test implemented by the provided function. return -1 if no corresponding element is found.        
+signature:     
+```go
+func FindIndex[T any](s []T, fn func(el T, index int) bool) int 
+```
+example:    
 ```go
 s := []int{0,1,2,3,4,5,6}
 r := FindIndex(s, func(el int, _ int) bool {
   return el > 0
 })
 // 1
-
 ```
 
 [⬆️ back](#gearslice)
 
 ### Find     
-return the value of the first element of the slice that passed the test function provided, return zero value if no corresponding element is found
-
+return the value of the first element of the slice that passed the test function provided, return zero value if no corresponding element is found        
+signature:     
+```go
+func Find[T any](s []T, fn func(el T, index int) bool) (T, bool)
+```
+example:     
 ```go
 type Person struct {
   Name   string
@@ -148,15 +143,17 @@ r, ok := Find(s, func(el Person, _ int) bool {
   return el.Age > 11 && el.Gender ==0
 })
 // Person{Name: "Dave", Age: 13, Gender: 0, Grade: 3}, true
-
-
 ```
 
 [⬆️ back](#gearslice)
 
 ### Includes      
-weather the slice contains a certain element      
-
+weather the slice contains a certain element       
+signature:       
+```go
+func IndexOf[T comparable](s []T, el T) int 
+```
+example:    
 ```go
 s := []string{"a", "b", "c"}
 r := gearslice.Includes(s, "d")
@@ -167,7 +164,11 @@ r := gearslice.Includes(s, "d")
 
 ### Every     
 weather all elements in the slice passed the test implemented by the provided function    
-
+signature:       
+```go
+func Every[T any](s []T, fn func(el T, index int) bool) bool 
+```
+example:    
 ```go
 s := []int{1, 2, 3, -1}
 r := gearslice.Every(s, func(el int, _ int) bool {
@@ -179,8 +180,12 @@ r := gearslice.Every(s, func(el int, _ int) bool {
 [⬆️ back](#gearslice)
 
 ### Some    
- weather at least one element in the slice passed the test implemented by the provide function
-
+ weather at least one element in the slice passed the test implemented by the provide function       
+signature:     
+```go
+func Some[T any](s []T, fn func(el T, index int) bool) bool
+```
+example:     
  ```go
  s := []int{1, 2, 3, -1}
 
@@ -193,19 +198,26 @@ r := gearslice.Some(s, func(el int, _ int) bool {
 [⬆️ back](#gearslice)
 
 ### Uniq     
-remove duplicate elements in the slice
-
+remove duplicate elements in the slice        
+signature:       
+```go
+func Uniq[T constraints.Ordered | constraints.Complex](s []T) []T 
+```
+example:    
 ```go
 s := []int{1, 2, 3, 4, 4, 5}
 r := gearslice.Uniq(s)
 // []int{1,2,3,4,5}
 ```
-
 [⬆️ back](#gearslice)
 
 ### Map     
-create a new slice populated with the results of calling the provide function on every element in the calling slice    
-
+create a new slice populated with the results of calling the provide function on every element in the calling slice      
+signature:     
+```go
+func Map[T, K any](s []T, cb func(el T, index int) K) []K 
+```
+example:      
 ```go
 s := []int{1, 2, 3, 4, 5}
 r := gearslice.Map(s, func(el int, _ int) int {
@@ -215,10 +227,13 @@ r := gearslice.Map(s, func(el int, _ int) int {
 ```
 [⬆️ back](#gearslice)
 
-
 ### ForEach    
-execute a provided function once for each element in the slice    
-
+execute a provided function once for each element in the slice     
+signature:     
+```go
+func ForEach[T any](s []T, cb func(el T, index int))
+```
+example:    
 ```go
 s := []int{1, 2, 3, 4, 5}
 var r = make([]string, 0, len(s))
@@ -230,8 +245,12 @@ gearslice.ForEach(s, func(el int, _ int) {
 [⬆️ back](#gearslice)
 
 ### Filter     
-filtered down to just the elements from the given slice that passed the test implemented by the provided function     
-
+filtered down to just the elements from the given slice that passed the test implemented by the provided function      
+signature:    
+```go
+func Filter[T any](s []T, filter func(el T, index int) bool) []T 
+```
+example:    
 ```go
 s := []int{1, 2, 3, 4, -1}
 r := gearslice.Filter(s, func(el int, _ int) bool {
@@ -243,7 +262,11 @@ r := gearslice.Filter(s, func(el int, _ int) bool {
 
 ### Contact      
 Concatenate multiple slices and return a new slice      
-
+signature:    
+```go
+func Contact[T any](args ...[]T) []T
+```
+example:     
 ```go
 s1 := []int{1, 2, 3, 4}
 s2 := []int{5, 6}
@@ -256,8 +279,12 @@ r := gearslice.Contact(s1, s2, s3)
 [⬆️ back](#gearslice)
 
 ### Pop     
-remove the last element from a slice and return that element, remove the removed element. it will change the length of the slice     
-
+remove the last element from a slice and return that element, remove the removed element. it will change the length of the slice       
+signature:    
+```go
+func Pop[T any](s *[]T) T
+```
+example:       
 ```go
 s := []int{1, 2, 3, 4}
 r := gearslice.Pop(&s)
@@ -267,8 +294,12 @@ r := gearslice.Pop(&s)
 [⬆️ back](#gearslice)
 
 ### Shift      
-remove the first element from a slice and return that removed element. This method changes the length of the slice
-
+remove the first element from a slice and return that removed element. This method changes the length of the slice       
+signature:      
+```go
+func Shift[T any](s *[]T) T
+```
+example:     
 ```go
 s := []int{1, 2, 3, 4}
 r := gearslice.Shift(&s)
@@ -278,8 +309,12 @@ r := gearslice.Shift(&s)
 [⬆️ back](#gearslice)
 
 ### Remove      
-remove a value in the slice at a given index. it will modify the origin slice
-
+remove a value in the slice at a given index. it will modify the origin slice      
+signature:     
+```go
+func Remove[T any](s *[]T, index int) error
+```
+example:     
 ```go
 s := []int{1, 2, 3}
 r := gearslice.Remove(&s, 1)
@@ -288,8 +323,12 @@ r := gearslice.Remove(&s, 1)
 [⬆️ back](#gearslice)
 
 ### Insert     
-insert a value in the slice at a given index. it will modify the origin slice
-
+insert a value in the slice at a given index. it will modify the origin slice       
+signature:      
+```go
+func Insert[T any](s *[]T, index int, value T) error
+```
+example:     
 ```go
 s := []int{1, 2, 3}
 gearslice.Insert(&s, 1, 20)
@@ -298,8 +337,12 @@ gearslice.Insert(&s, 1, 20)
 [⬆️ back](#gearslice)
 
 ### Drop    
-drop n elements from the beginning(if n greater than zero) or the end(if n less than zero) of the slice    
-
+drop n elements from the beginning(if n greater than zero) or the end(if n less than zero) of the slice       
+signature:      
+```go
+func Drop[T any](s []T, n int) ([]T, error)
+```
+example:        
 ```go
 s := []int{1, 2, 3, 4, 5, 6, 7}
 r, _ := gearslice.Drop(s, 2)
@@ -308,8 +351,12 @@ r, _ := gearslice.Drop(s, 2)
 [⬆️ back](#gearslice)
 
 ### Sample    
-get a random element from the slice
-
+get a random element from the slice       
+signature:       
+```go
+func Sample[T any](s []T) T
+```
+example:     
 ```go
 s := []int{1, 2, 3, 4, 5, 6, 7, 8}
 r := gearslice.Includes(s, gearslice.Sample(s))
@@ -318,8 +365,12 @@ r := gearslice.Includes(s, gearslice.Sample(s))
 [⬆️ back](#gearslice)
 
 ### Reverse     
-reverse a slice, return a new slice
-
+reverse a slice, return a new slice       
+signature:     
+```go
+func Reverse[T any](s []T) []T 
+```
+example:     
 ```go
 s := []int{1, 2, 3, 4, 5}
 r := gearslice.Reverse(s)
@@ -329,6 +380,11 @@ r := gearslice.Reverse(s)
 
 ### Count     
 return the number of elements in the slice that equal to value      
+signature:     
+```go
+func Count[T comparable](s []T, value T) int
+```
+example:     
 ```go
 s := []int{1, 2, 3, 4, 4}
 r := gearslice.Count(s, 4)
@@ -337,7 +393,12 @@ r := gearslice.Count(s, 4)
 [⬆️ back](#gearslice)
 
 ### CountBy      
-return the number of the elements in the slice that pass the test implemented by the provided the function     
+return the number of the elements in the slice that pass the test implemented by the provided the function         
+signature:    
+```go
+func CountBy[T comparable](s []T, fn func(el T, index int) bool) int
+```
+example:    
 ```go
 s := []int{1, 2, 3, 4, 5, 5, 6, 7, 8}
 r := gearslice.CountBy(s, func(el int, _ int) bool {
@@ -348,8 +409,12 @@ r := gearslice.CountBy(s, func(el int, _ int) bool {
 [⬆️ back](#gearslice)
 
 ### SubString     
-return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied. Not include the index element
-
+return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied. Not include the index element        
+signature:    
+```go
+func SubString(str string, start, end int) string
+```
+example:    
 ```go
 str := "hello world"
 r := gearstring.SubString(s, 1, 5)
@@ -357,8 +422,12 @@ r := gearstring.SubString(s, 1, 5)
 ```
 [⬆️ back](#gearstring)
 ### CharAt     
-return a specified character from a string
-
+return a specified character from a string     
+signature:    
+```go
+func CharAt(str string, index int) string
+```
+example:    
 ```go
 str := "hello world"
 r := gearstring.CharAt(str, 2)
@@ -367,8 +436,12 @@ r := gearstring.CharAt(str, 2)
 [⬆️ back](#gearstring)
 
 ### Contact     
-Concatenate multiple strings and return a new string
-
+Concatenate multiple strings and return a new string        
+signature:    
+```go
+func Contact(args ...string) string
+```
+example:     
 ```go
 r := gearslice.Contact("hello ", "world")
 // "hello world"
@@ -376,8 +449,12 @@ r := gearslice.Contact("hello ", "world")
 [⬆️ back](#gearstring)
 ```
 ### ToUpperCase     
-change the first letter of the string to upper
-
+change the first letter of the string to upper     
+signature:    
+```go
+func ToUpperCase(s string) string
+```
+example:    
 ```go
 str := "hello world"
 r := gearstring.ToUpperCase(str)
@@ -385,8 +462,12 @@ r := gearstring.ToUpperCase(str)
 ```
 [⬆️ back](#gearstring)
 ### ToLowerCase     
-change the first letter of the string to lower
-
+change the first letter of the string to lower       
+sigmature:     
+```go
+func ToLowerCase(s string) string
+```
+example:     
 ```go
 str := "HELLO WORLD"
 r := gearstring.ToLowerCase(str)
@@ -395,17 +476,26 @@ r := gearstring.ToLowerCase(str)
 [⬆️ back](#gearstring)
 
 ### DesensitizeData    
-make data insensitive via hidden part of the data
-
+make data insensitive via hidden part of the data       
+signature:    
+```go
+func DesensitizeData
+```
+example:    
 ```go
 str := "123这段文字加密00000"
 r, _ := gearstring.DesensitizeData(str, 3, 9, "@")
 // "123@@@@@@00000"
 ```
 [⬆️ back](#gearstring)
+
 ### DesensitizePhone      
 hidden middle 4 numbers of the mobile phone, default placeholder is '*'       
-
+signature:    
+```go
+func DesensitizePhone(val string, placeholder string) (string, error)
+```
+example:    
 ```go
 phone := "13299889988"
 r := gearstring.DesensitizePhone(phone, "#")
@@ -414,8 +504,12 @@ r := gearstring.DesensitizePhone(phone, "#")
 [⬆️ back](#gearstring)
 
 ### Pick
-return parts of the map according to keys
-
+return parts of the map according to keys     
+signature:     
+```go
+func Pick[K comparable, V any](m map[K]V, keys []K) map[K]V 
+```
+example:    
 ```go
 m := map[string]int{"a": 1, "b": 2, "c": 3}
 r := gearmap.Pick(m, []string{"a", "b"})
@@ -424,8 +518,12 @@ r := gearmap.Pick(m, []string{"a", "b"})
 [⬆️ back](#gearmap)
 
 ### PickBy     
-return parts of a map passed the test implemented by the provided function     
-
+return parts of a map passed the test implemented by the provided function       
+signature:     
+```go
+func PickBy[K comparable, V any](m map[K]V, fn func(k K, v V) bool) map[K]V 
+```
+example:    
 ```go
 m := map[string]int{"a": 1, "b": 2, "c": 3}
 r := gearmap.PickBy(m, func(_ string, v int) bool {
@@ -436,8 +534,12 @@ r := gearmap.PickBy(m, func(_ string, v int) bool {
 [⬆️ back](#gearmap)
 
 ### Omit     
-remove parts of a map according to keys
-
+remove parts of a map according to keys      
+signature:    
+```go
+func Omit[K comparable, V any](m map[K]V, keys []K) map[K]V
+```
+example:      
 ```go
 m := map[string]int{"a": 1, "b": 2, "c": 3}
 r := gearmap.Omit(m, []string{"a", "b"})
@@ -446,8 +548,12 @@ r := gearmap.Omit(m, []string{"a", "b"})
 [⬆️ back](#gearmap)
 
 ### OmitBy     
-remove parts of a map passed the test implemented by the provided function
-
+remove parts of a map passed the test implemented by the provided function      
+signature:     
+```go
+func OmitBy[K comparable, V any](m map[K]V, fn func(k K, v V) bool) map[K]V
+```
+example:   
 ```go
 m := map[string]int{"a": 1, "b": 2, "c": 3}
 r := gearmap.OmitBy(m, func(_ string, v int) bool {
@@ -458,8 +564,12 @@ r := gearmap.OmitBy(m, func(_ string, v int) bool {
 [⬆️ back](#gearmap)
 
 ### Values     
-return values of the m
-
+return values of the map      
+signature:     
+```go
+func Values[K comparable, V any](m map[K]V) []V
+```
+example:      
 ```go
 m := map[string]int{"a": 1, "b": 2, "c": 3}
 r := gearmap.Values(m)
@@ -469,8 +579,12 @@ sort.Strings(r)
 [⬆️ back](#gearmap)
 
 ### Keys     
-return keys of the map
-
+return keys of the map         
+signature:     
+```go
+func Keys[K comparable, V any](m map[K]V) []K
+```
+example:     
 ```go
 m := map[string]int{"a": 1, "b": 2, "c": 3}
 r := gearmap.Keys(m)
@@ -480,8 +594,12 @@ sort.Strings(r)
 [⬆️ back](#gearmap)
 
 ### Assign     
-merge multiple maps into a new map.
-
+merge multiple maps into a new map      
+signature:      
+```go
+func Assign[K comparable, V any](maps ...map[K]V) map[K]V
+```
+example:    
 ```go
 m1 := map[string]int{"a": 1, "b": 2, "c": 3}
 m2 := map[string]int{"d": 4}
@@ -491,8 +609,12 @@ r := gearmap.Assign(m1, m2)
 [⬆️ back](#gearmap)
 
 ### Sum     
-return a sum of the slice
-
+return a sum of the slice       
+signature:     
+```go
+func Sum[T constraints.Integer | constraints.Float | constraints.Complex](s []T) T
+```
+example:      
 ```go
 s := []int{1, 2, 3, 4, 5}
 r := gearmath.Sum(s)
@@ -501,8 +623,12 @@ r := gearmath.Sum(s)
 [⬆️ back](#gearmath)
 
 ### SumBy     
-summarize the values in the slice using the given return value from the function
-
+summarize the values in the slice using the given return value from the function      
+signature:    
+```go
+func SumBy[T any, V constraints.Integer | constraints.Float](s []T, fn func(el T, index int) V) V
+```
+example:    
 ```go
 s := []string{"hello", "world"}
 r := gearmath.SumBy(s, func(el string, _ int) int {
@@ -514,7 +640,11 @@ r := gearmath.SumBy(s, func(el string, _ int) int {
 
 ### Min     
 return the minimum value of the slice, return zero value if the slice is empty     
-
+signature:    
+```go
+func Min[T constraints.Integer | constraints.Float](s []T) T
+```
+example:    
 ```go
 s := []int{1, 2, 3, 4, -4, 5, 6}
 r := gearmath.Min(s)
@@ -524,7 +654,11 @@ r := gearmath.Min(s)
 
 ### Max      
 return the minimum value of the slice, return zero value if the slice is empty      
-
+signature:     
+```go
+func Max[T constraints.Integer | constraints.Float](s []T) T 
+```
+example:     
 ```go
 s := []int{1, 2, 3, 4, -4, 5, 6}
 r := gearmath.Max(s)
@@ -533,8 +667,12 @@ r := gearmath.Max(s)
 [⬆️ back](#gearmath)
 
 ### Mean     
-return the mean value of the slice      
-
+return the mean value of the slice           
+signature:    
+```go
+func Mean(s []float64) float64
+```
+example:    
 ```go
 s := []float64{2, 4, 6, 8}
 r := gearmath.Mean(s)
@@ -543,8 +681,12 @@ r := gearmath.Mean(s)
 [⬆️ back](#gearmath)
 
 ### IsPrime     
-weather a number is a prime      
-
+weather a number is a prime   
+signature:    
+```go
+func IsPrime(num int) bool
+```
+example:    
 ```go
 gearmath.IsPrime(4)
 // false
@@ -553,7 +695,11 @@ gearmath.IsPrime(4)
 
 ### Format    
 format a unix timestamp according the layout      
-
+signature:    
+```go
+func Format(t int64, layout string) string
+```
+example:    
 ```go
 var timestamp int64 = 1673259412 // 2023-01-09 18:16:52
 r := geardate.Format(timestamp, geardate.DefaultLayout)
@@ -563,7 +709,11 @@ r := geardate.Format(timestamp, geardate.DefaultLayout)
 
 ### IsLeap     
 weather the year is leap      
-
+signature:     
+```go
+func IsLeap(year int) bool
+```
+example:   
 ```go
 geardate.IsLeap(2023)
 // false

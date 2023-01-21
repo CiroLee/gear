@@ -27,7 +27,7 @@ func SumBy[T any, V constraints.Integer | constraints.Float](s []T, fn func(el T
 
 // Min return the minimum value of the slice
 // return zero value if the slice is empty
-func Min[T constraints.Ordered](s []T) T {
+func Min[T constraints.Integer | constraints.Float](s []T) T {
 	var min T
 	if len(s) == 0 {
 		return min
@@ -43,7 +43,7 @@ func Min[T constraints.Ordered](s []T) T {
 
 // Max return the minimum value of the slice
 // return zero value if the slice is empty
-func Max[T constraints.Ordered](s []T) T {
+func Max[T constraints.Integer | constraints.Float](s []T) T {
 	var max T
 	if len(s) == 0 {
 		return max
