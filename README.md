@@ -50,7 +50,7 @@ func main() {
 ### gearstring    
 > string expansion functions    
 
-- [Substring](#substring)
+- [Substring](#Substring)
 - [CharAt](#charat)
 - [Contact](#contact)
 - [ToUpperCase](#touppercase)
@@ -151,7 +151,7 @@ r, ok := Find(s, func(el Person, _ int) bool {
 weather the slice contains a certain element       
 signature:       
 ```go
-func IndexOf[T comparable](s []T, el T) int 
+func Includes[T comparable](s []T, el T) bool
 ```
 example:    
 ```go
@@ -408,16 +408,16 @@ r := gearslice.CountBy(s, func(el int, _ int) bool {
 ```
 [⬆️ back](#gearslice)
 
-### SubString     
+### Substring     
 return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied. Not include the index element        
 signature:    
 ```go
-func SubString(str string, start, end int) string
+func Substring(str string, start, end int) string
 ```
 example:    
 ```go
 str := "hello world"
-r := gearstring.SubString(s, 1, 5)
+r := gearstring.Substring(s, 1, 5)
 // "ello"
 ```
 [⬆️ back](#gearstring)

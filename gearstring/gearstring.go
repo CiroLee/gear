@@ -10,9 +10,9 @@ import (
 * like javascript String methods
  */
 
-// SubString return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied
+// Substring return the part of the string from the start and excluding the end, or to the end of the string if no end index is supplied
 // ps: not include the end index element
-func SubString(str string, start, end int) string {
+func Substring(str string, start, end int) string {
 	var runeStr = []rune(str)
 	_start, _end := start, end
 	if start < 0 {
@@ -109,9 +109,9 @@ func DesensitizeData(val string, from, to uint, placeholder string) (string, err
 	}
 
 	f, t := int(from), int(to)
-	before := SubString(val, 0, f)
+	before := Substring(val, 0, f)
 	hidden := strings.Repeat(p, t-f)
-	after := SubString(val, t, len(strRune))
+	after := Substring(val, t, len(strRune))
 
 	return Contact(before, hidden, after), nil
 }

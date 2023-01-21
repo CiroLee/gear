@@ -10,12 +10,12 @@ func TestSubstring(t *testing.T) {
 	is := assert.New(t)
 
 	str := "hello world"
-	r1 := SubString(str, 1, 5)
-	r2 := SubString(str, -1, 5)
-	r3 := SubString(str, 1, -1)
-	r4 := SubString(str, 12, 6)
-	r5 := SubString(str, 1, 12)
-	r6 := SubString(str, 2, 2)
+	r1 := Substring(str, 1, 5)
+	r2 := Substring(str, -1, 5)
+	r3 := Substring(str, 1, -1)
+	r4 := Substring(str, 12, 6)
+	r5 := Substring(str, 1, 12)
+	r6 := Substring(str, 2, 2)
 
 	is.Equal(r1, "ello")
 	is.Equal(r2, "hello")
