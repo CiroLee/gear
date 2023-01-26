@@ -279,7 +279,7 @@ r := gearslice.Contact(s1, s2, s3)
 [⬆️ back](#gearslice)
 
 ### Pop     
-remove the last element from a slice and return that element, remove the removed element. it will change the length of the slice       
+remove the last element from a slice and return that element, it will change the length of the slice       
 signature:    
 ```go
 func Pop[T any](s *[]T) T
@@ -446,8 +446,8 @@ example:
 r := gearslice.Contact("hello ", "world")
 // "hello world"
 
-[⬆️ back](#gearstring)
 ```
+[⬆️ back](#gearstring)
 ### ToUpperCase     
 change the first letter of the string to upper     
 signature:    
