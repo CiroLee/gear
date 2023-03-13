@@ -693,6 +693,28 @@ gearmath.IsPrime(4)
 ```
 [⬆️ back](#gearmath)
 
+### IsSubset      
+return true if the slice contains all the elements in the subset
+
+```go
+s1 := []int{1, 2, 3, 4}
+s2 := []int{1, 3}
+r := gearslice.IsSubset(s1, s2)
+// true
+```
+[⬆️ back](#gearmath)
+
+### Union     
+return the union values of slices      
+
+```go
+s1, s2, s3 := []int{1, 2, 3, 4}, []int{2, 5, 7}, []int{-1, 0, 0}
+r := Union(s1, s2, s3)
+sort.Ints(r)
+// []int{-1, 0, 1, 2, 3, 4, 5, 7}
+```
+[⬆️ back](#gearmath)
+
 ### Format    
 format a unix timestamp according the layout      
 signature:    
@@ -720,24 +742,3 @@ geardate.IsLeap(2023)
 ```
 [⬆️ back](#gearmath)
 
-### IsSubset      
-return true if the slice contains all the elements in the subset
-
-```go
-s1 := []int{1, 2, 3, 4}
-s2 := []int{1, 3}
-r := gearslice.IsSubset(s1, s2)
-// true
-```
-[⬆️ back](#gearmath)
-
-### Union     
-return the union values of slices      
-
-```go
-s1, s2, s3 := []int{1, 2, 3, 4}, []int{2, 5, 7}, []int{-1, 0, 0}
-r := Union(s1, s2, s3)
-sort.Ints(r)
-// []int{-1, 0, 1, 2, 3, 4, 5, 7}
-```
-[⬆️ back](#gearmath)
