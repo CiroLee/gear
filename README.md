@@ -1,5 +1,5 @@
 # gear     
-> gear is a tiny front-end friendly go tool library, like lodash.
+> gear is a simple and easy to use golang library, like lodash.
 
 ## install
 ```shell
