@@ -87,7 +87,7 @@ func main() {
 - [IsLeap](#isleap)
 
 ### IndexOf    
-return the index of the element in the slice, if the element is not in the slice, return -1    
+return the index of the first element in the slice, if the element is not in the slice, return -1    
 signature:     
 ```go
 func IndexOf[T comparable](s []T, el T) int
