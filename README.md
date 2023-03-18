@@ -1,6 +1,7 @@
 # gear     
-> gear is a simple and easy to use golang library, like lodash.
+> gear is a simple and easy to use golang library, like lodash          
 
+[![codecov](https://codecov.io/gh/cirolee/gear/branch/main/graph/badge.svg)](https://codecov.io/gh/cirolee/go-loren/branch/main) ![GitHub](https://img.shields.io/github/license/CiroLee/gear)
 ## install
 ```shell
 go get github.com/CiroLee/gear
@@ -27,7 +28,9 @@ func main() {
 > slice expansion functions    
 
 - [IndexOf](#indexof)
+- [LastIndxOf](#lastindexof)
 - [FindIndex](#findindex)
+- [FindLastIndex](#findlastindex)
 - [Find](#find)
 - [Includes](#includes)
 - [Every](#every)
@@ -101,6 +104,17 @@ i := gearslice.IndexOf(s, "c")
 ```
 
 [⬆️ back](#gearslice)
+
+### LastIndexOf       
+return the index of the first element in the slice, if the element is not in the slice, return -1        
+signature:      
+```go
+arr := []int{1, 2, 3, 4, 5, 2, -1}
+index := gearslice.LastIndexOf(arr, 2) // 5
+```
+
+[⬆️ back](#gearslice)
+
 ### FindIndex
 return the index of the first element in the slice that passed the test implemented by the provided function. return -1 if no corresponding element is found.        
 signature:     
@@ -114,6 +128,23 @@ r := FindIndex(s, func(el int, _ int) bool {
   return el > 0
 })
 // 1
+```
+
+[⬆️ back](#gearslice)
+
+### FindLastIndex         
+FindIndex return the index of the last element in the slice that passed the test implemented by the provided function. return -1 if no corresponding element is found           
+signature:    
+```go
+func FindLastIndex[T any](s []T, fn func(el T, index int) bool) int
+```
+example:    
+```go
+arr := []string{"g", "r", "e", "e", "n"}
+index := gearslice.FindLastIndex(arr, func(el string, _ int) bool {
+  return el == "e"
+})
+// 3
 ```
 
 [⬆️ back](#gearslice)

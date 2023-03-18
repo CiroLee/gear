@@ -23,6 +23,38 @@ func IndexOf[T comparable](s []T, el T) int {
 	return -1
 }
 
+// LastIndexOf return the last index of the element in the slice, if the element is not in the slice, return -1
+func LastIndexOf[T comparable](s []T, el T) int {
+	for i := len(s) - 1; i >= 0; i-- {
+		if el == s[i] {
+			return i
+		}
+	}
+	return -1
+}
+
+// FindIndex return the index of the first element in the slice that passed the test implemented by the provided function
+// return -1 if no corresponding element is found
+func FindIndex[T any](s []T, fn func(el T, index int) bool) int {
+	for i, v := range s {
+		if fn(v, i) {
+			return i
+		}
+	}
+	return -1
+}
+
+// FindIndex return the index of the last element in the slice that passed the test implemented by the provided function
+// return -1 if no corresponding element is found
+func FindLastIndex[T any](s []T, fn func(el T, index int) bool) int {
+	for i := len(s) - 1; i >= 0; i-- {
+		if fn(s[i], i) {
+			return i
+		}
+	}
+	return -1
+}
+
 // Includes weather the slice contains a certain element
 func Includes[T comparable](s []T, el T) bool {
 	for _, v := range s {
@@ -102,17 +134,6 @@ func Find[T any](s []T, fn func(el T, index int) bool) (T, bool) {
 	}
 	var empty T
 	return empty, false
-}
-
-// FindIndex return the index of the first element in the slice that passed the test implemented by the provided function
-// return -1 if no corresponding element is found
-func FindIndex[T any](s []T, fn func(el T, index int) bool) int {
-	for i, v := range s {
-		if fn(v, i) {
-			return i
-		}
-	}
-	return -1
 }
 
 // Contact Concatenate multiple slices and return a new slice

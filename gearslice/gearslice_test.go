@@ -19,6 +19,18 @@ func TestIndexOf(t *testing.T) {
 	is.Equal(r2, 1)
 }
 
+func TestLastIndexOf(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	arr := []int{1, 2, 3, 4, 5, 2, -1}
+	l1 := LastIndexOf(arr, 2)
+	l2 := LastIndexOf(arr, 9)
+
+	is.Equal(l1, 5)
+	is.Equal(l2, -1)
+}
+
 func TestIncludes(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
@@ -167,6 +179,15 @@ func TestFindIndex(t *testing.T) {
 	is.Equal(r2, -1)
 }
 
+func TestFindLastIndex(t *testing.T) {
+	is := assert.New(t)
+	arr := []string{"g", "r", "e", "e", "n"}
+	l := FindLastIndex(arr, func(el string, _ int) bool {
+		return el == "e"
+	})
+
+	is.Equal(l, 3)
+}
 func TestPop(t *testing.T) {
 	is := assert.New(t)
 
