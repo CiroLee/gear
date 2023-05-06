@@ -30,3 +30,13 @@ func IsLeap(year int) bool {
 	}
 	return false
 }
+
+// get the time before or after the specified time
+func TimeOffset(date time.Time, offset string) (time.Time, error) {
+	d, err := time.ParseDuration(offset)
+	if err != nil {
+		var t time.Time
+		return t, err
+	}
+	return date.Add(d), nil
+}

@@ -88,6 +88,7 @@ func main() {
 > date expansion function      
 - [Format](#format)
 - [IsLeap](#isleap)
+- [TimeOffset](#timeoffset)
 
 ### IndexOf    
 return the index of the first element in the slice, if the element is not in the slice, return -1    
@@ -758,7 +759,7 @@ var timestamp int64 = 1673259412 // 2023-01-09 18:16:52
 r := geardate.Format(timestamp, geardate.DefaultLayout)
 // "2023-01-09 18:16:52"
 ```
-[⬆️ back](#gearmath)
+[⬆️ back](#geardate)
 
 ### IsLeap     
 weather the year is leap      
@@ -771,5 +772,16 @@ example:
 geardate.IsLeap(2023)
 // false
 ```
-[⬆️ back](#gearmath)
+[⬆️ back](#geardate)
+
+### TimeOffset         
+get the time before or after the specified time          
+signature:     
+```go
+func TimeOffset(date time.Time, offset string) (time.Time, error)
+```
+example:   
+```go
+date := time.Date(2023, time.May, 6, 12, 0, 0, 0, time.UTC)
+r, _ := geardate.TimeOffset(date, "1h30m") // 2023-05-06 13:30:00 +0000 UTC
 

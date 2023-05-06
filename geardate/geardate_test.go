@@ -2,6 +2,7 @@ package geardate
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -24,4 +25,31 @@ func TestIsLeap(t *testing.T) {
 	is.False(IsLeap(years[2]))
 	is.True(IsLeap(years[3]))
 
+}
+
+func TestTimeOffset(t *testing.T) {
+	date := time.Date(2023, time.May, 6, 12, 0, 0, 0, time.UTC)
+
+	t.Run("Valid offset", func(t *testing.T) {
+		t.Parallel()
+
+		offset := "1h30m"
+		offset_after := "-1h30m"
+		expectedDate := time.Date(2023, time.May, 6, 13, 30, 0, 0, time.UTC)
+		expectedDateAfter := time.Date(2023, time.May, 6, 10, 30, 0, 0, time.UTC)
+		result, err := TimeOffset(date, offset)
+		result2, err2 := TimeOffset(date, offset_after)
+		assert.NoError(t, err)
+		assert.Equal(t, expectedDate, result)
+		assert.NoError(t, err2)
+		assert.Equal(t, expectedDateAfter, result2)
+	})
+
+	t.Run("Invalid offset", func(t *testing.T) {
+		offset := "invalid"
+		expectedDate := time.Time{}
+		result, err := TimeOffset(date, offset)
+		assert.Error(t, err)
+		assert.Equal(t, expectedDate, result)
+	})
 }
