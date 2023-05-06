@@ -769,8 +769,7 @@ func IsLeap(year int) bool
 ```
 example:   
 ```go
-geardate.IsLeap(2023)
-// false
+geardate.IsLeap(2023) // false
 ```
 [⬆️ back](#geardate)
 
@@ -784,4 +783,6 @@ example:
 ```go
 date := time.Date(2023, time.May, 6, 12, 0, 0, 0, time.UTC)
 r, _ := geardate.TimeOffset(date, "1h30m") // 2023-05-06 13:30:00 +0000 UTC
+```
 
+[⬆️ back](#geardate)
