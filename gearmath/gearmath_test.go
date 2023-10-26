@@ -106,3 +106,15 @@ func TestUnion(t *testing.T) {
 
 	is.Equal(r, []int{-1, 0, 1, 2, 3, 4, 5, 7})
 }
+
+func TestIntersection(t *testing.T) {
+	is := assert.New(t)
+	// 测试两个有序的切片的交集
+	slice1 := []int{1, 2, 3, 4, 5}
+	slice2 := []int{3, 4, 5, 6, 7}
+	result := Intersection(slice1, slice2)
+	sort.Slice(result, func(i, j int) bool {
+		return result[i] < result[j]
+	})
+	is.Equal(result, []int{3, 4, 5})
+}

@@ -83,6 +83,7 @@ func main() {
 - [isPrime](isprime)
 - [IsSubset](#issubset)
 - [Union](#union)
+- [Intersection](#intersection)
 
 ### geardate     
 > date expansion function      
@@ -727,7 +728,11 @@ gearmath.IsPrime(4)
 
 ### IsSubset      
 return true if the slice contains all the elements in the subset
-
+signature:     
+```go
+func IsSubset[T comparable](s, subset []T) bool
+```
+example:     
 ```go
 s1 := []int{1, 2, 3, 4}
 s2 := []int{1, 3}
@@ -737,13 +742,30 @@ r := gearslice.IsSubset(s1, s2)
 [⬆️ back](#gearmath)
 
 ### Union     
-return the union values of slices      
-
+return the union values of slices       
+signature:     
+```go
+func Union[T constraints.Ordered | constraints.Complex](args ...[]T) []T
+```    
+example:
 ```go
 s1, s2, s3 := []int{1, 2, 3, 4}, []int{2, 5, 7}, []int{-1, 0, 0}
 r := Union(s1, s2, s3)
 sort.Ints(r)
 // []int{-1, 0, 1, 2, 3, 4, 5, 7}
+```
+[⬆️ back](#gearmath)
+
+### Intersection        
+return the same elements of two slices         
+signature:       
+```go
+func Intersection[T constraints.Ordered | constraints.Complex](slice1, slice2 []T) []T
+```
+example:     
+```go
+s1, s2 := []int{1, 2, 3, 4}, []int{1, 3, 5, 7}
+r := Intersection(s1, s2) // []int{1, 3}
 ```
 [⬆️ back](#gearmath)
 

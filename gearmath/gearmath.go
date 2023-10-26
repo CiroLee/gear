@@ -99,3 +99,26 @@ func IsSubset[T comparable](s, subset []T) bool {
 func Union[T constraints.Ordered | constraints.Complex](args ...[]T) []T {
 	return gearslice.Uniq(gearslice.Contact(args...))
 }
+
+// Intersection return the same elements of two slices
+func Intersection[T constraints.Ordered | constraints.Complex](slice1, slice2 []T) []T {
+	map1 := make(map[T]bool)
+	map2 := make(map[T]bool)
+
+	for _, a := range slice1 {
+		map1[a] = true
+	}
+
+	for _, b := range slice2 {
+		map2[b] = true
+	}
+
+	result := make([]T, 0)
+	for k := range map1 {
+		if map2[k] {
+			result = append(result, k)
+		}
+	}
+
+	return result
+}
